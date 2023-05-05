@@ -1,7 +1,3 @@
----
-description: Using API3's dAPIs in your Smart Contracts
----
-
 # Coding an on-chain roulette game using QRNG
 
 This example project demonstrates how to code a Solidity roulette game that uses API3's QRNG for true randomness. You will use Remix IDE to code and deploy the contract. [Click here to check out the project's Github repo with a proper working frontend]().
@@ -44,5 +40,5 @@ It should load up the Roulette contract.
 
 [Open in Remix➚]()
 
-> [Remix 1](/src/1.png)
+> ![Remix 1](/src/SS1.png)
 
