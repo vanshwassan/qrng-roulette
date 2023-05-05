@@ -42,3 +42,6 @@ It should load up the Roulette contract.
 
 > ![Remix 1](/src/SS1.png)
 
+The Roulette contract is going to be the main Requester contract that makes request to the QRNG Airnode using the [Request-Response Protocol (RRP)]().
+
+You first start by importing the `RrpRequesterV0` 
