@@ -24,7 +24,7 @@ The roulette that we're going to code will have the following betting options fo
 
 If the number after the spin lands on one of the selected numbers, the user wins the bet.
 
-1. Coding the `Roulette` Contract
+## Coding the `Roulette` Contract
 
 ::: tip Check your Network
 
@@ -576,3 +576,62 @@ function checkIfColorWon(uint256 _spin) internal returns (uint256) {
   }
 }
 ```
+
+> The complete contract code can be found [here]()
+
+## Deploying the `Roulette` Contract
+
+::: tip
+Set up your Testnet Metamask Account!
+
+Make sure you've already configured your Metamask wallet and funded it with some testnet ETH before moving forward. You can request some from here➚
+:::
+
+You will now deploy the `Roulette` contract and interact with it through the Remix IDE.
+
+### 1. Compiling the Contract
+
+[Click here➚]() to open the `Roulette` Contract in Remix if you haven't already.
+
+!img
+
+Click on the **COMPILE** tab on the left side of the dashboard and click on **Compile `roulette.sol`**
+
+!img
+
+### 2. Deploying the Contract
+
+
+Head to **Deploy and run Transactions** and select **Injected Provider — MetaMask** option under Environment. Connect your MetaMask. Make sure you’re on the Polygon Mumbai testnet.
+
+The `_airnodeRrpAddress` is the main `airnodeRrpAddress`. The RRP Contracts have already been deployed on-chain. You can check for your specific chain [here](). Fill it in and click on **transact** to deploy the contract.
+
+!img
+
+### 3. Deriving the Sponsor Wallet
+
+The [Sponsor Wallet]() needs to be derived from the requester's contract address (Lottery contract in this case), the Airnode address, and the Airnode xpub. The wallet is used to pay gas costs of the transactions. The sponsor wallet must be derived using the command [derive-sponsor-wallet-address]() from the Admin CLI. Use the value of the sponsor wallet address that the command outputs while making the request.
+
+**This wallet needs to be funded.**
+
+!qrng deets
+
+```sh
+npx @api3/airnode-admin derive-sponsor-wallet-address \
+  --airnode-xpub xpub6CuDdF9zdWTRuGybJPuZUGnU4suZowMmgu15bjFZT2o6PUtk4Lo78KGJUGBobz3pPKRaN9sLxzj21CMe6StP3zUsd8tWEJPgZBesYBMY7Wo \
+  --airnode-address 0x6238772544f029ecaBfDED4300f13A3c4FE84E1D \
+  --sponsor-address <Use the address of your deployed Roulett Contract>
+
+  Sponsor wallet address: 0x6394...5906757
+  # Use the above address from your command execution as the value for sponsorWallet.
+```
+
+Click on the `setRequestParameters` button and enter the QRNG Airnode address, `endpointID` and the `sponsorWallet` to set it on-chain.
+
+::: tip Designated Sponsor Wallets
+
+Sponsors should not fund a sponsorWallet with more than they can trust the Airnode with, as the Airnode controls the private key to the sponsorWallet. The deployer of such Airnode undertakes no custody obligations, and the risk of loss or misuse of any excess funds sent to the sponsorWallet remains with the sponsor.
+
+:::
+
+## Using the `Roulette` Contract
