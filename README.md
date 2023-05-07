@@ -1,5 +1,7 @@
 # Coding an on-chain roulette game using QRNG
 
+![a](/src/SS2.png)
+
 This example project demonstrates how to code a Solidity roulette game that uses API3's QRNG for true randomness. You will use Remix IDE to code and deploy the contract. [Click here to check out the project's Github repo with a proper working frontend]().
 
 [Click here to try out the Roulette]()
