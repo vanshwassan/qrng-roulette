@@ -1,14 +1,14 @@
 # Coding an on-chain roulette game using QRNG
 
-![a](/src/SS2.png)
+![Roulette](/src/SS2.png)
 
-This example project demonstrates how to code a Solidity roulette game that uses API3's QRNG for true randomness. You will use Remix IDE to code and deploy the contract. [Click here to check out the project's Github repo with a proper working frontend]().
+This example project demonstrates how to code a Solidity roulette game that uses API3's QRNG for true randomness. You will use Remix IDE to code and deploy the contract. [Click here to check out the project's Github repo with a proper working frontend](https://github.com/Ashar2shahid/qrng-roulette).
 
-[Click here to try out the Roulette]()
+[Click here to try out the Roulette](https://qrng-roulette.netlify.app/)
 
-Before starting, make sure you have a proper understanding of [Airnode]() and [how it works.]()
+Before starting, make sure you have a proper understanding of [Airnode](https://docs.api3.org/explore/airnode/what-is-airnode.html) and [how it works.](https://docs.api3.org/reference/airnode/latest/concepts/airnode.html)
 
-[Read more about QRNG and how it works.]()
+[Read more about QRNG and how it works.](https://docs.api3.org/reference/qrng/)
 
 ## Introduction
 
@@ -34,9 +34,9 @@ Make sure you're on a Testnet before trying to deploy the contracts on-chain!
 
 :::
 
-> The complete contract code can be found [here]()
+> The complete contract code can be found [here](https://github.com/Ashar2shahid/qrng-roulette/blob/main/contracts/contracts/Roulette.sol)
 
-Head on to [Remix online IDE]() using a browser that you have added Metamask support to. Not all browsers support [MetaMask➚]().
+Head on to [Remix online IDE](https://remix.ethereum.org) using a browser that you have added Metamask support to. Not all browsers support [MetaMask➚](https://metamask.io/).
 
 It should load up the Roulette contract.
 
@@ -44,9 +44,9 @@ It should load up the Roulette contract.
 
 > ![Remix 1](/src/SS1.png)
 
-The Roulette contract is going to be the main Requester contract that makes request to the QRNG Airnode using the [Request-Response Protocol (RRP)]().
+The Roulette contract is going to be the main Requester contract that makes request to the QRNG Airnode using the [Request-Response Protocol (RRP)](https://docs.api3.org/reference/qrng/airnode-rrp-v0.html).
 
-You first start by importing the `RrpRequesterV0`, which is the [Request-Response Protocol (RRP)](). You can then start coding the `Roulette` contract by inheriting  from `RrpRequesterV0`
+You first start by importing the `RrpRequesterV0`, which is the [Request-Response Protocol (RRP)](https://docs.api3.org/reference/qrng/airnode-rrp-v0.html). You can then start coding the `Roulette` contract by inheriting  from `RrpRequesterV0`
 
 You then define the following state variables:
 - `MIN_BET`: The minimum amount that is required to bet for a spin.
