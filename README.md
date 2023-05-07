@@ -595,11 +595,11 @@ You will now deploy the `Roulette` contract and interact with it through the Rem
 
 [Click here➚]() to open the `Roulette` Contract in Remix if you haven't already.
 
-!img
+![](/src/SS1.png)
 
 Click on the **COMPILE** tab on the left side of the dashboard and click on **Compile `roulette.sol`**
 
-!img
+![](/src/SS3.png)
 
 ### 2. Deploying the Contract
 
@@ -608,7 +608,7 @@ Head to **Deploy and run Transactions** and select **Injected Provider — MetaM
 
 The `_airnodeRrpAddress` is the main `airnodeRrpAddress`. The RRP Contracts have already been deployed on-chain. You can check for your specific chain [here](). Fill it in and click on **transact** to deploy the contract.
 
-!img
+![](/src/SS4.png)
 
 ### 3. Deriving the Sponsor Wallet
 
