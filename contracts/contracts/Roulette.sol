@@ -83,6 +83,7 @@ contract Roulette is RrpRequesterV0 {
   mapping(uint256 => BetType) public spinToBetType;
   mapping(uint256 => address) public spinToUser;
   mapping(uint256 => uint256) public spinResult;
+  uint256 public finalNumber;
 
   // ~~~~~~~ ERRORS ~~~~~~~
 
@@ -156,6 +157,7 @@ contract Roulette is RrpRequesterV0 {
     uint256 _qrngUint256 = abi.decode(data, (uint256));
     requestIdToResult[requestId] = _qrngUint256;
     _spinComplete(requestId, _qrngUint256);
+    finalNumber = (_qrngUint256 % 37);
     emit ReceivedUint256(requestId, _qrngUint256);
   }
 

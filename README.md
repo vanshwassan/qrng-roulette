@@ -56,13 +56,15 @@ You then define the following state variables:
 - `sponsorWallet`: A `payable` address variable to store the `sponsorWallet`, that needs to be funded later to cover the gas costs for the QRNG request fulfillment.
 - `endpointId`: A `bytes32` variable to store the unique identifier for the QRNG API endpoint.
 
-The contract also defines an enumeration type called "BetType" with five possible values:
+The contract also defines an enumeration type called `BetType` with five possible values:
 
-    Color
-    Number
-    EvenOdd
-    Third
-    Half
+```
+Color
+Number
+EvenOdd
+Third
+Half
+```
 
 These values represent different types of bets that players can make in the game of Roulette.
 
