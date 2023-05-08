@@ -119,6 +119,8 @@ The contract defines several mapping variables to store information about user b
   mapping(uint256 => BetType) public spinToBetType;
   mapping(uint256 => address) public spinToUser;
   mapping(uint256 => uint256) public spinResult;
+  uint256 public finalNumber;
+
 ```
 
 The contract also defines several error messages and events:
@@ -200,14 +202,13 @@ Finally, the function emits a `ReceivedUint256` event with the received `request
     emit RequestedUint256(requestId);
   }
 
-    /** @dev AirnodeRrp will call back with a response
-   *** if no response returned (0) user will have bet returned (see check functions) */
   function fulfillUint256(bytes32 requestId, bytes calldata data) external onlyAirnodeRrp {
     require(expectingRequestWithIdToBeFulfilled[requestId], "Unexpected Request ID");
     expectingRequestWithIdToBeFulfilled[requestId] = false;
     uint256 _qrngUint256 = abi.decode(data, (uint256));
     requestIdToResult[requestId] = _qrngUint256;
     _spinComplete(requestId, _qrngUint256);
+    finalNumber = (_qrngUint256 % 37);
     emit ReceivedUint256(requestId, _qrngUint256);
   }
 ```
@@ -632,8 +633,55 @@ Click on the `setRequestParameters` button and enter the QRNG Airnode address, `
 
 ::: tip Designated Sponsor Wallets
 
-Sponsors should not fund a sponsorWallet with more than they can trust the Airnode with, as the Airnode controls the private key to the sponsorWallet. The deployer of such Airnode undertakes no custody obligations, and the risk of loss or misuse of any excess funds sent to the sponsorWallet remains with the sponsor.
+Sponsors should not fund a `sponsorWallet` with more than they can trust the Airnode with, as the Airnode controls the private key to the `sponsorWallet`. The deployer of such Airnode undertakes no custody obligations, and the risk of loss or misuse of any excess funds sent to the `sponsorWallet` remains with the sponsor.
 
 :::
 
 ## Using the `Roulette` Contract
+
+After deploying the contract, click the dropdown right under **Deployed Contracts**
+and select `topUpSponsorWallet()`. This is a payable function that will fund the `sponsorWallet`. This wallet will be responsible to fulfill the randomness request.
+
+Fill in the amount in wei under **VALUE** on the tab above and click on `topUpSponsorWallet()`
+
+For Polygon Mumbai, 0.05 (50000000000000000 wei) Matic should be sufficient for now.
+
+After funding the `sponsorWallet`, we are also supposed to fund the main contract(house) too. You can use Metamask to send some funds to the house. Copy the deployed contract address and send funds to it.
+
+For this example, we can send 0.1 matic to the main contract(house).
+
+Copy the deployed contract address and send 0.1 matic to it through your Metamask wallet.
+
+![](/src/SS5.png)
+
+Now you're ready to make a bet of your choice.
+
+- use `betOneThird()` to bet on either the first, second or the third dozen of the numbers on the board.
+- use `betHalf()` to bet on either the first or the second half of the numbers on the board.
+- use `betEvenOdd()` to bet on either the set of all even or odd numbers on the board
+- use `betColor()` to bet on all the red or black numbers on the board.
+- use `betNumber()` to bet on any one number you wishe on the board.
+
+For this example, let's bet on all the even numbers of the table. As the `MIN_BET` is set to be `10000000000000` wei, we'll use that value for making the bet.
+
+Set the value to `10000000000000` wei and select `betEvenOdd()`. Pass in `true` to select all the even numbers on the table and click on **transact**
+
+![](/src/SS6.png)
+
+Now wait for the bet to be complete (For the QRNG Airnode to fulfill your request)
+
+You can also check your `sponsorWallet` address on the block explorer to see if the QRNG Airnode fulfilled the request.
+
+![](/src/SS7.png)
+
+You can now check the `finalNumber` getter function to see the final winning number.
+
+![](/src/SS8.png)
+
+This means we lost the bet. If you head back over to the block explorer and check the `Fulfill` transaction, we can see:
+
+- The contract sent 0.000001 MATIC to the `sponsorWallet`.
+- The contract also sent 0.0000002 MATIC back to the deployer of the contract.
+- The rest of the bet amount is kept by the house.
+
+![](/src/SS9.png)
