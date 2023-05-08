@@ -678,7 +678,7 @@ You can now check the `finalNumber` getter function to see the final winning num
 
 ![](/src/SS8.png)
 
-This means we lost the bet. If you head back over to the block explorer and check the `Fulfill` transaction, we can see:
+This means you lost the bet. If you head back over to the block explorer and check the `Fulfill` transaction, you can see:
 
 - The contract sent 0.000001 MATIC to the `sponsorWallet`.
 - The contract also sent 0.0000002 MATIC back to the deployer of the contract.
